@@ -43,12 +43,16 @@ public class MainActivity extends AppCompatActivity{
 
     public void openClicked(View V){
         Toast.makeText(getApplicationContext(), "OPEN CLICKED", Toast.LENGTH_SHORT).show();
-        new SendServer().execute("http://172.20.10.3:3000/openWindow");    //server에 open작업 요청한 후 state받아와서 나머지 set다시
+        new SendServer().execute("http://172.20.10.3:3000/openWindow");
     }
 
     public void closeClicked(View v){
         //Toast.makeText(getApplicationContext(), "CLOSE CLICKED", Toast.LENGTH_SHORT).show();
-        new SendServer().execute("http://172.20.10.3:3000/closeWindow"); //server에 close작업 요청한 후 state받아와서 나머지 set다시
+        new SendServer().execute("http://172.20.10.3:3000/closeWindow");
+    }
+
+    public void refreshClicked(View v){
+        new SendServer().execute("http://172.20.10.3:3000/getState");
     }
 
     public class SendServer extends AsyncTask<String, String, String> {
@@ -152,7 +156,7 @@ public class MainActivity extends AppCompatActivity{
 
 
             super.onPostExecute(result);
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show(); //value from server "successful / invalid"
+            //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show(); //value from server "successful / invalid"
             //message=result;
             //,기준으로 파싱해서 배열에 넣기 3개짜리. 그래서 state이면 배열 0 1 2 쓰고 open/close면 배열 0번만 쓰면 됨
 
@@ -166,7 +170,7 @@ public class MainActivity extends AppCompatActivity{
 
             if(parseValues[0].equals("windowSet=0") || parseValues[0].equals("windowSet=1") )//open or close clicked
             {
-                Toast.makeText(getApplicationContext(), "window is going to be closed/opened", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "press Refresh button after 10 sec...", Toast.LENGTH_LONG).show();
             }
             else //getState setting하는부분
             {

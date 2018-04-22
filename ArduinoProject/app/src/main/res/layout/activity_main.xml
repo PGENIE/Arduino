@@ -123,6 +123,12 @@
         android:onClick="closeClicked"
         android:text="Close" />
 </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Refresh"
+            android:onClick="refreshClicked"
+            />
     </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
